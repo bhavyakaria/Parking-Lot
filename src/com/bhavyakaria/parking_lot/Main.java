@@ -1,6 +1,7 @@
 package com.bhavyakaria.parking_lot;
 
 import com.bhavyakaria.parking_lot.enums.Key;
+import com.bhavyakaria.parking_lot.enums.ParkingStrategy;
 import com.bhavyakaria.parking_lot.enums.VehicleType;
 import com.bhavyakaria.parking_lot.models.User;
 import com.bhavyakaria.parking_lot.models.Vehicle;
@@ -30,19 +31,22 @@ public class Main {
         parkingLotService.park(car4);
         parkingLotService.park(car4);
         parkingLotService.park(car3);
+
+        parkingLotService.changeParkingStrategy(ParkingStrategy.TOP_BOTTOM);
+
         parkingLotService.park(car1);
         parkingLotService.park(car2);
         parkingLotService.park(car4);
 
-        System.out.println("Available Parking Spots On Floor 1: "+parkingLotService.availableParkingSpotsOnAFloor(1));
+        System.out.println("Available Parking Spots On Bottom: "+parkingLotService.availableParkingSpotsOnAFloor(1));
 
         parkingLotService.unPark(car1);
 
-        System.out.println("Available Parking Spots On Floor 1: "+parkingLotService.availableParkingSpotsOnAFloor(1));
+        System.out.println("Available Parking Spots On Top: "+parkingLotService.availableParkingSpotsOnAFloor(NO_OF_FLOORS));
 
-        parkingLotService.getFloorAnalytics(1, Key.COLOR, "Red");
-        parkingLotService.getFloorAnalytics(1, Key.BRAND, "Honda");
-        parkingLotService.getFloorAnalytics(1, Key.BRAND, "BMW");
+//        parkingLotService.getBuildingAnalytics(1, Key.COLOR, "Red");
+//        parkingLotService.getBuildingAnalytics(1, Key.BRAND, "Honda");
+//        parkingLotService.getBuildingAnalytics(1, Key.BRAND, "BMW");
 
     }
 }
