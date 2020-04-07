@@ -1,7 +1,7 @@
 package com.bhavyakaria.parking_lot.enums;
 
 public enum Status {
-    UNDER_MAINTANENCE,
+    UNDER_MAINTENANCE,
     OPEN,
-    CLOSE
+    CLOSED
 }

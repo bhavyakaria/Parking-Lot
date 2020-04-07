@@ -17,12 +17,4 @@ public class ParkingSpot {
         this.isAvailable = val;
     }
 
-    @Override
-    public String toString() {
-        return "ParkingSpot{" +
-                "id=" + id +
-                ", isAvailable=" + isAvailable +
-                ", status=" + status +
-                '}';
-    }
 }

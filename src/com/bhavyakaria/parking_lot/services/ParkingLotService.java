@@ -1,9 +1,11 @@
 package com.bhavyakaria.parking_lot.services;
 
 import com.bhavyakaria.parking_lot.enums.Key;
-import com.bhavyakaria.parking_lot.enums.ParkingStrategy;
 import com.bhavyakaria.parking_lot.enums.Status;
+import com.bhavyakaria.parking_lot.exceptions.BaseException;
+import com.bhavyakaria.parking_lot.interfaces.ParkingStrategy;
 import com.bhavyakaria.parking_lot.models.*;
+import com.bhavyakaria.parking_lot.models.parking_strategy.BottomUpStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +28,10 @@ public class ParkingLotService {
             listOfFloors.add(floor);
         }
 
-        building = new Building(1, "Building One", listOfFloors, Status.OPEN, ParkingStrategy.BOTTOM_UP);
+        building = new Building(1, "Building One", listOfFloors, Status.OPEN, new BottomUpStrategy());
     }
 
-    public boolean park(Vehicle vehicle) {
+    public boolean park(Vehicle vehicle) throws BaseException {
         return building.park(vehicle);
     }
 
@@ -45,7 +47,7 @@ public class ParkingLotService {
         return building.floors.get(floorNumber-1).countOfParkingSpotsAvailable();
     }
 
-    public void getBuildingAnalytics(Building building, int floorNumber, Key key, String value) {
+    public void getBuildingAnalytics(int floorNumber, Key key, String value) {
         building.getFloorAnalytics(floorNumber, key, value);
     }
 

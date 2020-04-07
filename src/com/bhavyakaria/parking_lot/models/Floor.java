@@ -12,6 +12,7 @@ public class Floor {
 
     public Floor(int number) {
         this.number = number;
+        this.status = Status.OPEN;
     }
 
     public void addParkingSpot(int num) {
@@ -23,6 +24,10 @@ public class Floor {
         for (ParkingSpot parkingSpot : parkingSpots) {
             if (parkingSpot.isAvailable) {
                 parkingSpot.setAvailable(false);
+
+                if (countOfParkingSpotsAvailable() == 0) {
+                    status = Status.CLOSED;
+                }
                 return parkingSpot;
             }
         }

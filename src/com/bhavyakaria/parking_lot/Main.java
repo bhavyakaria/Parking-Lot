@@ -1,17 +1,19 @@
 package com.bhavyakaria.parking_lot;
 
 import com.bhavyakaria.parking_lot.enums.Key;
-import com.bhavyakaria.parking_lot.enums.ParkingStrategy;
 import com.bhavyakaria.parking_lot.enums.VehicleType;
+import com.bhavyakaria.parking_lot.exceptions.BaseException;
+import com.bhavyakaria.parking_lot.interfaces.ParkingStrategy;
 import com.bhavyakaria.parking_lot.models.User;
 import com.bhavyakaria.parking_lot.models.Vehicle;
+import com.bhavyakaria.parking_lot.models.parking_strategy.TopDownStrategy;
 import com.bhavyakaria.parking_lot.services.ParkingLotService;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BaseException {
 
-        int NO_OF_FLOORS = 10;
+        int NO_OF_FLOORS = 2;
         int NO_OF_PARKING_SPOTS_PER_FLOOR = 5;
 
         ParkingLotService parkingLotService = new ParkingLotService(NO_OF_FLOORS, NO_OF_PARKING_SPOTS_PER_FLOOR);
@@ -28,15 +30,20 @@ public class Main {
 
         System.out.println("Available Parking Spots: "+parkingLotService.availableParkingSpotsOnAFloor(1));
 
-        parkingLotService.park(car4);
-        parkingLotService.park(car4);
-        parkingLotService.park(car3);
+        try {
+            parkingLotService.park(car4);
+            parkingLotService.park(car4);
+            parkingLotService.park(car3);
 
-        parkingLotService.changeParkingStrategy(ParkingStrategy.TOP_BOTTOM);
+            parkingLotService.changeParkingStrategy(new TopDownStrategy());
 
-        parkingLotService.park(car1);
-        parkingLotService.park(car2);
-        parkingLotService.park(car4);
+            parkingLotService.park(car1);
+            parkingLotService.park(car2);
+            parkingLotService.park(car4);
+        } catch (BaseException e) {
+
+        }
+
 
         System.out.println("Available Parking Spots On Bottom: "+parkingLotService.availableParkingSpotsOnAFloor(1));
 
@@ -44,9 +51,9 @@ public class Main {
 
         System.out.println("Available Parking Spots On Top: "+parkingLotService.availableParkingSpotsOnAFloor(NO_OF_FLOORS));
 
-//        parkingLotService.getBuildingAnalytics(1, Key.COLOR, "Red");
-//        parkingLotService.getBuildingAnalytics(1, Key.BRAND, "Honda");
-//        parkingLotService.getBuildingAnalytics(1, Key.BRAND, "BMW");
+        parkingLotService.getBuildingAnalytics(1, Key.COLOR, "Red");
+        parkingLotService.getBuildingAnalytics(1, Key.BRAND, "Honda");
+        parkingLotService.getBuildingAnalytics(2, Key.BRAND, "BMW");
 
     }
 }
